@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Remove Duplicates from Array</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        h1 {
+            color: #333;
+        }
+        label {
+            display: block;
+            margin: 10px 0 5px;
+        }
+        input {
+            padding: 8px;
+            width: 100%;
+            max-width: 300px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            padding: 10px 15px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        h2 {
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+    <h1>Remove Duplicates from Array</h1>
+    <div>
+        <label for="arrayInput">Enter elements (comma-separated):</label>
+        <input type="text" id="arrayInput" placeholder="e.g. 1, 2, 3, 2, 4" />
+    </div>
+    <button onclick="removeDuplicates()">Remove Duplicates</button>
+    <h2 id="result"></h2>
+
+    <script>
+        function removeDuplicates() {
+            const input = document.getElementById('arrayInput').value;
+            const resultElement = document.getElementById('result');
+
+            const array = input.split(',').map(item => item.trim());
+
+            const uniqueElements = Array.from(new Set(array));
+
+            resultElement.innerText = 'Unique Elements: ' + uniqueElements.join(', ');
+        }
+    </script>
+</body>
+</html>

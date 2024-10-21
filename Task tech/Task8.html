@@ -1,0 +1,82 @@
+8th code:    <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fibonacci Series in Reverse</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        h1 {
+            color: #333;
+        }
+        label {
+            display: block;
+            margin: 10px 0 5px;
+        }
+        input {
+            padding: 8px;
+            width: 100%;
+            max-width: 300px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            padding: 10px 15px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        h2 {
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+    <h1>Fibonacci Series in Reverse</h1>
+    <div>
+        <label for="number">Enter the number of terms:</label>
+        <input type="number" id="number" placeholder="Enter number of terms" />
+    </div>
+    <button onclick="generateFibonacci()">Generate Fibonacci Series</button>
+    <h2 id="result"></h2>
+
+    <script>
+        function generateFibonacci() {
+            const numTerms = parseInt(document.getElementById('number').value);
+            const resultElement = document.getElementById('result');
+            let fibSeries = [];
+
+            if (numTerms <= 0 || isNaN(numTerms)) {
+                resultElement.innerText = 'Please enter a valid number of terms.';
+                return;
+            }
+
+            // Generate Fibonacci series
+            let a = 0, b = 1;
+            for (let i = 0; i < numTerms; i++) {
+                fibSeries.push(a);
+                let next = a + b;
+                a = b;
+                b = next;
+            }
+
+            // Reverse the series
+            fibSeries.reverse();
+
+            // Display the result
+            resultElement.innerText = 'Fibonacci Series in Reverse: ' + fibSeries.join(', ');
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instagram Login Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #fafafa;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .login-container {
+            background-color: white;
+            padding: 40px;
+            border: 1px solid #ddd;
+            width: 300px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-size: 14px;
+            color: #555;
+        }
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #0095f6;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #007bb5;
+        }
+        .error {
+            color: red;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="login-container">
+        <h2>Instagram Login</h2>
+        <form id="loginForm">
+            <label for="login-option">Login via Email, Username or Phone:</label>
+            <input type="text" id="login-option" placeholder="Email, Username, or Phone" />
+            <div id="login-option-error" class="error"></div>
+
+            <label for="password">Password:</label>
+            <input type="password" id="password" placeholder="Password" />
+            <div id="password-error" class="error"></div>
+
+            <button type="button" onclick="validateForm()">Login</button>
+        </form>
+    </div>
+
+    <script>
+        function validateForm() {
+            const loginOption = document.getElementById('login-option').value;
+            const password = document.getElementById('password').value;
+
+            let valid = true;
+            
+            // Reset previous error messages
+            document.getElementById('login-option-error').innerText = '';
+            document.getElementById('password-error').innerText = '';
+
+            // Validate login option (Email, Username, Phone)
+            if (isEmail(loginOption)) {
+                if (!loginOption.endsWith('@gmail.com')) {
+                    document.getElementById('login-option-error').innerText = 'Email must end with @gmail.com.';
+                    valid = false;
+                }
+            } else if (isUsername(loginOption)) {
+                if (/\d/.test(loginOption) || /\s/.test(loginOption)) {
+                    document.getElementById('login-option-error').innerText = 'Username should not contain digits or spaces.';
+                    valid = false;
+                }
+            } else if (isPhoneNumber(loginOption)) {
+                if (!/^\d{10}$/.test(loginOption)) {
+                    document.getElementById('login-option-error').innerText = 'Phone number must be exactly 10 digits.';
+                    valid = false;
+                }
+            } else {
+                document.getElementById('login-option-error').innerText = 'Invalid login option. Enter a valid Email, Username, or Phone number.';
+                valid = false;
+            }
+
+            // Validate password (8 chars, 1 upper, 1 lower, 1 digit, 1 special)
+            const passwordRegex = /^(?=.[a-z])(?=.[A-Z])(?=.\d)(?=.[\W_]).{8,}$/;
+            if (!passwordRegex.test(password)) {
+                document.getElementById('password-error').innerText = 'Password must be at least 8 characters long and contain at least 1 uppercase letter, 1 lowercase letter, 1 digit, and 1 special symbol.';
+                valid = false;
+            }
+
+            // If the form is valid
+            if (valid) {
+                alert('Login successful!');
+            }
+        }
+
+        function isEmail(input) {
+            const emailPattern = /^[a-zA-Z0-9._%+-]+@gmail\.com$/;
+            return emailPattern.test(input);
+        }
+
+        function isUsername(input) {
+            const usernamePattern = /^[a-zA-Z]+$/;
+            return usernamePattern.test(input);
+        }
+
+        function isPhoneNumber(input) {
+            const phonePattern = /^\d{10}$/;
+            return phonePattern.test(input);
+        }
+    </script>
+
+</body>
+</html>
